@@ -20,18 +20,11 @@ tf.random.set_seed(1)
 mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-"""
-# Display sample input
-plt.imshow(x_train[0], cmap='gray')
-plt.show()
-"""
-
 """ DATA PREPROCESSING """
 x_train = tf.keras.utils.normalize(x_train, axis=1)
 x_test = tf.keras.utils.normalize(x_test, axis=1)
 
 """ MODEL CREATION """
-
 # Hyperparemeters
 hidden_layer_size = 128
 output_size = 10
@@ -55,83 +48,10 @@ model.fit(x=x_train, y=y_train, epochs=num_epochs, callbacks=[early_stopper])
 test_loss, test_acc = model.evaluate(x_test, y_test)
 print('Test set Loss: {0} \tAccuracy: {1:.2f}%'.format(test_loss, test_acc*100))
 
-from random import random
+""" SAVE MODEL """
+# Guide at: https://www.tensorflow.org/tutorials/keras/save_and_load
+model.save('saved_model') 
 
-def print_predictions(predictions, verbose=1):
-    """
-    Summarizes the model's list of predictions in a way determined by the 
-    specified verbosity.
-    
-    Parameters
-    ----------
-    predictions : list
-        A list where each value represents the model's confidence that the
-        digit equal to the index where the value is located was in the input.
-    verbose : int, optional
-        Controls how much information about the descriptions to display. 
-        If the value is 1, the output will only include the prediction that the 
-        model was most confident in. If the value is 2, all predictions and 
-        their respective confidence levels will be displayed in the output.
-        The default is 1.
-    """
-    prediction_digit = np.argmax(predictions)
-    confidence_percentage = np.max(predictions) * 100
-    print('Prediction: {0} with {1:.2f}% confidence'.format(prediction_digit, 
-                                                        confidence_percentage))
-    
-    if (verbose == 2):
-        print('Digit:\t Confidence')
-        for digit, confidence in enumerate(predictions[0]):
-            print('{0}:\t {1:.2f}'.format(digit, confidence*100))
-    
-    
-def test_model_descriptive(test_input, verbose=1, actual=None):
-    """
-    Plots a single input, evaluates the model on it, and describes the model's
-    predictions.
-    
-    Parameters
-    ----------
-    test_input : numpy.ndarray
-        An input image of shape (28, 28)containing a handwritten digit. The 
-        image should be in grayscale and normalized before being passed as a 
-        parameter.
-    verbose : int, optional
-        Controls how much information is displayed when the model predictions
-        are summarized. The default is 1.
-    actual : int, optional
-        The actual digit that was written. The default is None.
-    """
-    # Plot the input image
-    plt.imshow(test_input, cmap='gray')
-    plt.show()
-    
-    # Calculate and display predictions
-    predictions = model.predict(test_input.reshape(1, 28, 28))
-    print_predictions(predictions, verbose)
-    
-    # If a correct answer is provided, display it
-    if actual is not None:
-        print('Actual digit:', actual)
-        
-
-
-def test_model_on_random():
-    """
-    Tests the model on a random input from the test set.
-    """
-    input_index = int(random()*len(x_test))
-    test_model_descriptive(x_test[input_index], actual=y_test[input_index])
-    
-
-test_model_on_random()
-prompt = 'Press enter to see more model predictions on random test examples,' \
-    ' or q to quit'
-answer = input(prompt)
-while answer.lower() != 'q':
-    test_model_on_random()
-    answer = input(prompt)
-    
 """ CUSTOM IMAGE INPUT """
 import imageio
 
@@ -168,5 +88,3 @@ def get_image(filename):
     normalized_image = tf.keras.utils.normalize(grayscale_image, axis=1)
     
     return normalized_image
-
-test_model_descriptive(get_image("https://i.imgur.com/a3Rql9C.png"))
