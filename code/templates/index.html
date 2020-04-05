@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello World!</h1>
+</div>
+<!--
+    format('LLL') renders the date and time according to the time zone and
+    local settings on the user's computer. This can be anywhere from
+    'L' to 'LLLL' for varying levels of verbosity.
+-->
+<p>
+    The local date and time is {{ moment(current_time).format('LLL') }}.
+</p>
+<p>
+    That was {{ moment(current_time).fromNow(refresh=True) }}
+</p>
+{% endblock %}
