@@ -1,7 +1,9 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+
 from datetime import datetime
+from digit_recognizer import DigitRecognizer
 
 app = Flask(__name__)
 
@@ -11,6 +13,7 @@ moment = Moment(app)
 
 @app.route('/')
 def index():
+    DigitRecognizer.get_model()
     return render_template('index.html', current_time=datetime.utcnow())
 
 
