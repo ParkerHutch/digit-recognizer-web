@@ -1,20 +1,22 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<!––Written by Andrew Ferrin––>
+<html lang="">
 
-{% block title %}Flasky{% endblock %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Guess The Number</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="p5.js"></script>
+    <script src="sketch.js"></script>
+  </head> 
 
-{% block page_content %}
-<div class="page-header">
-    <h1>Hello World!</h1>
-</div>
-<!--
-    format('LLL') renders the date and time according to the time zone and
-    local settings on the user's computer. This can be anywhere from
-    'L' to 'LLLL' for varying levels of verbosity.
--->
-<p>
-    The local date and time is {{ moment(current_time).format('LLL') }}.
-</p>
-<p>
-    That was {{ moment(current_time).fromNow(refresh=True) }}
-</p>
-{% endblock %}
+  <body>
+  </body>
+
+</html>
