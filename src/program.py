@@ -3,18 +3,15 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 
 from datetime import datetime
-from digit_recognizer import DigitRecognizer
 
 app = Flask(__name__)
 
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
-
 @app.route('/')
 def index():
-    DigitRecognizer.get_model()
-    return render_template('index.html', current_time=datetime.utcnow())
+    return render_template('index.html')
 
 
 @app.route('/user/<name>')
