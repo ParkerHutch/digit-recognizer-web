@@ -13,6 +13,8 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 # Set random seeds to ensure consistency
+import random
+random.seed(1)
 np.random.seed(1)
 tf.random.set_seed(1) 
 
