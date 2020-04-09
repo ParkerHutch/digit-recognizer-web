@@ -1,9 +1,7 @@
 var testModel;
 
 (async function() {
-	//ensures that TensorFlow has been imported properly
 	console.log("Loading Model");
-	//testModel = await tf.loadGraphModel('src/model/saved_model_json/model.json');
 	testModel = await tf.loadLayersModel('model/saved_model_json/model.json');
 	console.log("Model Loaded");
 })();
@@ -26,14 +24,6 @@ let randomCircles;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	console.log(windowWidth);
-	// console.log("test");
-	// tf.loadGraphModel('src/model/saved_model_json/model.json').then(function(model) {
-	// 	console.log("Importing Model");
- 	// 		testModel = model;
- 	// 		console.log("Model Imported");
-	// });
-	// console.log("test");
-	// tf.loadGraphModel('src/model/saved_model_json/model.json').then(model=>testModel=model);
 
     randomCircles = new Array(8);
 
@@ -87,7 +77,15 @@ function predict() {
        		imageArray[y][x] = map(red(cells[y][x].fillColor), 0, 255, 1, 0);
     	}
     }
-    var prediction = testModel.predict(tf.Tensor(imageArray));
+	var predictions = testModel.predict(tf.expandDims(imageArray)).array().then(function(preds) {
+		preds = preds[0]
+		digit_prediction = preds.indexOf(Math.max(...preds))
+		prediction_confidence = preds[digit_prediction] * 100
+		console.log("Prediction: " + digit_prediction + " with " + prediction_confidence + "% confidence")
+		console.log(preds)
+	});
+
+
 }
 
 function draw() {
