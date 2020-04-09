@@ -1,8 +1,10 @@
 var testModel;
+
 (async function() {
 	//ensures that TensorFlow has been imported properly
 	console.log("Loading Model");
-	testModel = await tf.loadGraphModel('src/model/saved_model_json/model.json');
+	//testModel = await tf.loadGraphModel('src/model/saved_model_json/model.json');
+	testModel = await tf.loadLayersModel('model/saved_model_json/model.json');
 	console.log("Model Loaded");
 })();
 
@@ -85,7 +87,7 @@ function predict() {
        		imageArray[y][x] = map(red(cells[y][x].fillColor), 0, 255, 1, 0);
     	}
     }
-    var prediction = testModel.predict(imageArray);
+    var prediction = testModel.predict(tf.Tensor(imageArray));
 }
 
 function draw() {
