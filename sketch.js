@@ -24,7 +24,7 @@ let randomCircles;
 
 //written by Andrew Ferrin
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(max(windowWidth, 1200), max(windowHeight, 800));
 	
     	randomCircles = new Array(8);
 
