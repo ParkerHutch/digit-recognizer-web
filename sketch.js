@@ -1,4 +1,4 @@
-//4
+//5
 var testModel;
 
 (async function() {
@@ -58,9 +58,15 @@ function setup() {
 	slider.position(width / 2 - GRID_SIZE / 2, GRID_SIZE + GRID_PADDING * 2);
 
   	eraseButton = createButton("Erase All");
-  	eraseButton.position(GRID_PADDING * 2, GRID_PADDING * 2);
+  	eraseButton.position(GRID_PADDING * 2, GRID_PADDING);
+	
   	eraseButton.style("width", (width - GRID_SIZE) / 2.0 - (GRID_PADDING * 4) + "px");
   	eraseButton.style("height", (GRID_SIZE  / 4) + "px");
+  	eraseButton.style("border", "5px solid #000000");
+  	eraseButton.style("color", "white");
+	eraseButton.style("text-align", "center");
+	eraseButton.style("font-size", "50px");
+
   	eraseButton.mousePressed(eraseAll);
 }
 
