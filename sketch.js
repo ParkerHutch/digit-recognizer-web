@@ -104,8 +104,13 @@ function draw() {
 		randomCircles[i].show(randomCircles);
 	}
 
-    showCells();
-    drawColorRect();
+    	showCells();
+    	drawColorRect();
+	
+	for(let i = 0; i < 5; i++) {
+    		fill(0, map(i, 0, 5, 255, 50));
+    		text(guesses[i][0] + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING + 55 * i);
+    	}
 }
 
 function mouseDragged() {
