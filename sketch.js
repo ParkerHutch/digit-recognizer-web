@@ -1,4 +1,4 @@
-//3
+//4
 var testModel;
 
 (async function() {
@@ -59,7 +59,7 @@ function setup() {
 
   	eraseButton = createButton("Erase All");
   	eraseButton.position(GRID_PADDING * 2, GRID_PADDING * 2);
-  	eraseButton.style("width", (width - GRID_SIZE) / 2.0 - (GRID_PADDING * 2) + "px");
+  	eraseButton.style("width", (width - GRID_SIZE) / 2.0 - (GRID_PADDING * 4) + "px");
   	eraseButton.style("height", (GRID_SIZE  / 4) + "px");
   	eraseButton.mousePressed(eraseAll);
 }
