@@ -200,7 +200,7 @@ class Cell {
 	show() {
 		noFill();
 		strokeWeight(2);
-        fill(this.fillColor);
+        	fill(this.fillColor);
 		stroke(this.strokeColor);
 		rect(this.x, this.y, this.size, this.size);
 	}
@@ -211,7 +211,7 @@ class Ball {
 		this.position = createVector(x, y);
 		this.velocity = createVector(random(-3, 3), random(-3, 3));
 		this.radius = radius;
-		this.alpha = random;
+		this.alpha = random(30, 50);
 	}
 
 	update() {
@@ -231,7 +231,7 @@ class Ball {
 			this.position.y = height - this.radius;
 			this.velocity.y *= -1;
 		}
-		this.alpha = map(sin((frameCount + this.radius) / 60), -1, 1, 100, 200);
+		this.alpha = map(sin((frameCount + this.radius) / 60), -1, 1, -30, 30);
 	}
 
 	drawLines(balls) {
