@@ -174,7 +174,7 @@ function drawColorRect() {
 	strokeWeight(1);
     	stroke(0);
 	fill(slider.value());
-    	rect(GRID_PADDING * 2, slider.y + slider.height + GRID_PADDING * 5, slider.width, (GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 5));
+    	rect(GRID_PADDING * 2, slider.y + slider.height + GRID_PADDING * 1.5, slider.width, (GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5));
 }
 
 function showCells() {
