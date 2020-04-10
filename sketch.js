@@ -126,7 +126,7 @@ function draw() {
 	
 	push();
 	translate(0, GRID_PADDING * 10);
-	for(let i = 0; i < 5; i++) {
+	for(let i = 0; i < 4; i++) {
     		fill(0, map(i, 0, 4, 255, 10));
 		let sizeOfText = (i == 0) ? (100) : (50);
 		textSize(sizeOfText);
