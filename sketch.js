@@ -125,7 +125,7 @@ function draw() {
     	drawColorRect();
 	
 	if(cellImage != null) {
-		let colorRectY = slider.y + slider.height + GRID_PADDING * 1.5, slider.width;
+		let colorRectY = slider.y + slider.height + GRID_PADDING * 1.5;
 		let colorRectHeight = ((GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5)) / 2;
 		let imageStartY = colorRectY + colorRectHeight + GRID_PADDING;
 		let imgSize = ((GRID_SIZE + GRID_PADDING) - (imageStartY)) - GRID_PADDING;
