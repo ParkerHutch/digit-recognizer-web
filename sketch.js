@@ -1,6 +1,8 @@
 //written by Andrew Ferrin
 var testModel;
 
+var cellImage = null;
+
 (async function() {
 	console.log("Loading Model");
 	testModel = await tf.loadLayersModel('model/saved_model_json/model.json');
@@ -87,16 +89,18 @@ function eraseAll() {
 }
 
 function predict() {
-    for(var y = 0; y < cells.length; y++) {
-    	for(var x = 0; x < cells[y].length; x++) {
-       		imageArray[y][x] = map(red(cells[y][x].fillColor), 0, 255, 1, 0);
+	cellImage = createImage(28, 28);
+	for(var y = 0; y < cells.length; y++) {
+    		for(var x = 0; x < cells[y].length; x++) {
+			cellImage.set(x, y, cells[y][x].fillColor);
+       			imageArray[y][x] = map(red(cells[y][x].fillColor), 0, 255, 1, 0);	
+    		}
     	}
-    }
+	cellImage.updatePixels();
 	var predictions = testModel.predict(tf.expandDims(imageArray)).array().then(function(preds) {
 		preds = preds[0];
 		for(let i = 0; i < preds.length; i++) {
     			guesses[i] = {digit: i, confidence: preds[i]};
-			console.log("Number#: " + i + " Confidence#: " + preds[i]);
 			console.log("Number: " + guesses[i].digit + " Confidence: " + guesses[i].confidence);
 		}
 		//sorts the list based on the confidence
@@ -119,6 +123,14 @@ function draw() {
 
     	showCells();
     	drawColorRect();
+	
+	if(cellImage != null) {
+		let colorRectY = slider.y + slider.height + GRID_PADDING * 1.5, slider.width;
+		let colorRectHeight = ((GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5)) / 2;
+		let imageStartY = colorRectY + colorRectHeight + GRID_PADDING;
+		let imgSize = ((GRID_SIZE + GRID_PADDING) - (imageStartY)) - GRID_PADDING;
+		image(cellImage, GRID_PADDING * 2, imageStartY, imgSize, imgSize);
+	}
 	
 	fill(255, 200);
 	noStroke();
@@ -173,7 +185,7 @@ function drawColorRect() {
 	strokeWeight(1);
     	stroke(0);
 	fill(slider.value());
-    	rect(GRID_PADDING * 2, slider.y + slider.height + GRID_PADDING * 1.5, slider.width, (GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5));
+    	rect(GRID_PADDING * 2, slider.y + slider.height + GRID_PADDING * 1.5, slider.width, ((GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5)) / 2);
 }
 
 function showCells() {
