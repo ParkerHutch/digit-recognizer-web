@@ -1,4 +1,4 @@
-//6
+//written by Andrew Ferrin
 var testModel;
 
 (async function() {
@@ -22,10 +22,9 @@ let eraseButton;
 let imageArray = new Array(NUMBER_OF_CELLS);
 let randomCircles;
 
-//written by Andrew Ferrin
 function setup() {
 	createCanvas(max(windowWidth, 1200), max(windowHeight, 800));
-	
+	alert("Move the slider to adjust grayscale value. left click and drag to draw. Right click and drag to erase");
     	randomCircles = new Array(8);
 
     	colorMode(RGB);
