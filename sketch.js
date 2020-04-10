@@ -63,13 +63,21 @@ function setup() {
   	eraseButton.style("color", "black");
 	eraseButton.style("text-align", "center");
 	eraseButton.style("font-size", "50px");
-
+	eraseButton.mouseOver(onErase).mouseOut(offErase);
   	eraseButton.mousePressed(eraseAll);
 	
 	slider = createSlider(0, 255, 0, 0);
 	slider.style('width', (width / 2 - GRID_SIZE / 2 - GRID_PADDING * 4) + 'px');
 	slider.style('height', GRID_PADDING * 5);
 	slider.position(GRID_PADDING * 2, eraseButton.y + eraseButton.height + GRID_PADDING * 2);
+}
+
+function onErase() {
+	eraseButton.style("background-color", "#c4c4c4");
+}
+
+function offErase() {
+	eraseButton.style("background-color", "white");
 }
 
 function eraseAll() {
