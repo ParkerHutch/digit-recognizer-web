@@ -1,4 +1,4 @@
-//5
+//6
 var testModel;
 
 (async function() {
@@ -53,21 +53,30 @@ function setup() {
 		randomCircles[i] = new Ball(random(radius, width - radius), random(radius, height - radius), radius);
 	}
 
-	slider = createSlider(0, 255, 0, 0);
-	slider.style('width', GRID_SIZE + 'px');
-	slider.position(width / 2 - GRID_SIZE / 2, GRID_SIZE + GRID_PADDING * 2);
-
   	eraseButton = createButton("Erase All");
   	eraseButton.position(GRID_PADDING * 2, GRID_PADDING);
 	
   	eraseButton.style("width", (width - GRID_SIZE) / 2.0 - (GRID_PADDING * 4) + "px");
   	eraseButton.style("height", (GRID_SIZE  / 4) + "px");
+	eraseButton.style("background-color", "white");
   	eraseButton.style("border", "5px solid #000000");
-  	eraseButton.style("color", "white");
+  	eraseButton.style("color", "black");
 	eraseButton.style("text-align", "center");
 	eraseButton.style("font-size", "50px");
-
+	eraseButton.mouseOver(onErase).mouseOut(offErase);
   	eraseButton.mousePressed(eraseAll);
+	
+	slider = createSlider(0, 255, 0, 0);
+	slider.style('width', (width / 2 - GRID_SIZE / 2 - GRID_PADDING * 4) + 'px');
+	slider.position(GRID_PADDING * 2, eraseButton.y + eraseButton.height + GRID_PADDING * 2);
+}
+
+function onErase() {
+	eraseButton.style("background-color", "#c4c4c4");
+}
+
+function offErase() {
+	eraseButton.style("background-color", "white");
 }
 
 function eraseAll() {
@@ -112,8 +121,10 @@ function draw() {
     	showCells();
     	drawColorRect();
 	
-	
+	fill(255, 200);
 	noStroke();
+	rect(width / 2 + GRID_SIZE / 2 + GRID_PADDING * 2, GRID_PADDING, width / 2 - GRID_SIZE / 2 - GRID_PADDING * 4, GRID_SIZE);
+	
 	push();
 	translate(0, GRID_PADDING * 10);
 	for(let i = 0; i < 5; i++) {
@@ -128,6 +139,7 @@ function draw() {
 		textAlign(LEFT, BOTTOM);
 		text((guesses[i].confidence * 100).toFixed(5) + "%", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4 + (amountMore * 4 / 5.0), GRID_PADDING * 10 + 110 * i);
     	}
+	pop();
 }
 
 function mouseDragged() {
@@ -160,9 +172,9 @@ function evaluateCell() {
 
 function drawColorRect() {
 	strokeWeight(1);
-    stroke(0);
-    fill(slider.value());
-    rect(width / 2 - GRID_SIZE / 2, slider.y + GRID_PADDING * 3, GRID_SIZE, GRID_PADDING * 2);
+    	stroke(0);
+	fill(slider.value());
+    	rect(GRID_PADDING * 2, slider.y + slider.height + GRID_PADDING * 5, slider.width, (GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 5));
 }
 
 function showCells() {
