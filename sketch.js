@@ -1,4 +1,4 @@
-//5
+//6
 var testModel;
 
 (async function() {
@@ -62,8 +62,9 @@ function setup() {
 	
   	eraseButton.style("width", (width - GRID_SIZE) / 2.0 - (GRID_PADDING * 4) + "px");
   	eraseButton.style("height", (GRID_SIZE  / 4) + "px");
+	eraseButton.style("background-color", "white");
   	eraseButton.style("border", "5px solid #000000");
-  	eraseButton.style("color", "white");
+  	eraseButton.style("color", "black");
 	eraseButton.style("text-align", "center");
 	eraseButton.style("font-size", "50px");
 
