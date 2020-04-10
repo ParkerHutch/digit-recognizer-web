@@ -25,11 +25,10 @@ let randomCircles;
 //written by Andrew Ferrin
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	console.log(windowWidth);
+	
+    	randomCircles = new Array(8);
 
-    randomCircles = new Array(8);
-
-    colorMode(RGB);
+    	colorMode(RGB);
 	
 	for(let i = 0; i < guesses.length; i++) {
     		guesses[i] = {digit: i, confidence: 0};
