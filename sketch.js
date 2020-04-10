@@ -1,3 +1,4 @@
+//1
 var testModel;
 
 (async function() {
@@ -93,6 +94,7 @@ function predict() {
 		guesses.sort(function(x, y) {
 			return x.confidence - y.confidence;
 		});
+		guesses.reverse();
 		console.table(guesses);
 	});
 }
@@ -102,15 +104,19 @@ function draw() {
 
 	for(var i = 0; i < randomCircles.length; i++) {
 		randomCircles[i].update();
-		randomCircles[i].show(randomCircles);
+		randomCircles[i].drawLines(randomCircles);
+		randomCircles[i].show();
 	}
 
     	showCells();
     	drawColorRect();
 	
+	textSize(50);
+   	textAlign(CENTER, TOP);
+	
 	for(let i = 0; i < 5; i++) {
-    		fill(0, map(i, 0, 5, 255, 50));
-    		text(guesses[i][0] + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING * 2 + 55 * i);
+    		fill(0, map(i, 0, 4, 255, 50));
+    		text(guesses[i].digit + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING * 2 + 55 * i);
     	}
 }
 
@@ -200,7 +206,7 @@ class Ball {
 		this.alpha = map(sin((frameCount + this.radius) / 60), -1, 1, 100, 200);
 	}
 
-	show(balls) {
+	drawLines(balls) {
 		for(let i = 0; i < balls.length; i++) {
 			let d = dist(balls[i].position.x, balls[i].position.y, this.position.x, this.position.y);
 			if(d > 0 && d < balls[i].radius + this.radius + (GRID_PADDING * 10)) {
@@ -209,6 +215,9 @@ class Ball {
 				line(balls[i].position.x, balls[i].position.y, this.position.x, this.position.y);
 			}
 		}
+	}
+
+	show() {
 		fill(0, this.alpha);
 		noStroke();
 		ellipse(this.position.x, this.position.y, this.radius * 2, this.radius * 2);
