@@ -85,7 +85,7 @@ function predict() {
 	var predictions = testModel.predict(tf.expandDims(imageArray)).array().then(function(preds) {
 		preds = preds[0];
 		for(let i = 0; i < preds.length; i++) {
-			guesses[i] = {digit: i, confidence: preds[i]};
+			guesses[i] = {i, preds[i]};
 			console.log("Number: " + guesses[i][0] + " Confidence: " + guesses[i][1]);
 		}
 		//sorts the list based on the confidence
@@ -109,7 +109,7 @@ function draw() {
 	
 	for(let i = 0; i < 5; i++) {
     		fill(0, map(i, 0, 5, 255, 50));
-    		text(guesses[i][0] + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING + 55 * i);
+    		text(guesses[i][0] + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING * 2 + 55 * i);
     	}
 }
 
