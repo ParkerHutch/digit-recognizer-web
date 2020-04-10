@@ -1,4 +1,4 @@
-//2
+//3
 var testModel;
 
 (async function() {
@@ -18,7 +18,6 @@ var guesses = Array(10);
 
 let slider;
 let textInput;
-let submitButton;
 let eraseButton;
 let imageArray = new Array(NUMBER_OF_CELLS);
 let randomCircles;
@@ -58,14 +57,10 @@ function setup() {
 	slider.style('width', GRID_SIZE + 'px');
 	slider.position(width / 2 - GRID_SIZE / 2, GRID_SIZE + GRID_PADDING * 2);
 
-	submitButton = createButton("Make Guess");
-	submitButton.position(slider.x, slider.y + GRID_PADDING * 6);
-	submitButton.style("width", GRID_SIZE + "px");
-  	submitButton.mousePressed(predict);
-
   	eraseButton = createButton("Erase All");
-  	eraseButton.position(slider.x, submitButton.y + submitButton.height * 5 / 4.0);
-  	eraseButton.style("width", GRID_SIZE + "px");
+  	eraseButton.position(GRID_PADDING * 2, GRID_PADDING * 2);
+  	eraseButton.style("width", (width - GRID_SIZE) / 2.0 - (GRID_PADDING * 2) + "px");
+  	eraseButton.style("height", (GRID_SIZE  / 4) + "px");
   	eraseButton.mousePressed(eraseAll);
 }
 
@@ -113,7 +108,8 @@ function draw() {
 	
 	
 	noStroke();
-	
+	push();
+	translate(0, GRID_PADDING * 10);
 	for(let i = 0; i < 5; i++) {
     		fill(0, map(i, 0, 4, 255, 10));
 		let sizeOfText = (i == 0) ? (100) : (50);
