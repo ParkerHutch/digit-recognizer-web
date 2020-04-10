@@ -13,6 +13,8 @@ let cells = new Array(NUMBER_OF_CELLS);
 
 const GRID_PADDING = 10;
 
+var guesses = Array(10);
+
 let slider;
 let textInput;
 let submitButton;
@@ -28,6 +30,10 @@ function setup() {
     randomCircles = new Array(8);
 
     colorMode(RGB);
+	
+	for(let i = 0; i < guesses.length; i++) {
+    		guesses[i] = {digit: i, confidence: 0};
+    	}
 
 	for(var y = 0; y < cells.length; y++) {
 		cells[y] = new Array(NUMBER_OF_CELLS);
@@ -78,14 +84,17 @@ function predict() {
     	}
     }
 	var predictions = testModel.predict(tf.expandDims(imageArray)).array().then(function(preds) {
-		preds = preds[0]
-		digit_prediction = preds.indexOf(Math.max(...preds))
-		prediction_confidence = preds[digit_prediction] * 100
-		console.log("Prediction: " + digit_prediction + " with " + prediction_confidence + "% confidence")
-		console.log(preds)
+		preds = preds[0];
+		for(int i = 0; i < preds.length; i++) {
+			guesses[i] = {digit: i, confidence: preds[i]};
+			console.log("Number: " + guesses[i][0] + " Confidence: " + guesses[i][1]);
+		}
+		//sorts the list based on the confidence
+		guesses.sort(function(x, y) {
+			return x.confidence - y.confidence;
+		});
+		console.table(guesses);
 	});
-
-
 }
 
 function draw() {
