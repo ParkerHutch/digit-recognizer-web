@@ -92,8 +92,8 @@ function predict() {
 	cellImage = createImage(28, 28);
 	for(var y = 0; y < cells.length; y++) {
     		for(var x = 0; x < cells[y].length; x++) {
-			cellImage.set(x, y, cells[y][x].fillColor);
-       			imageArray[y][x] = map(red(cells[y][x].fillColor), 0, 255, 1, 0);	
+			cellImage.set(x, y, cells[y][x].fillColor, (red(cells[y][x].fillColor) == 255) ? (0) : (255));
+       			imageArray[y][x] = map(red(cells[y][x].fillColor), 5, 1, 0);
     		}
     	}
 	cellImage.updatePixels();
@@ -129,7 +129,7 @@ function draw() {
 		let colorRectHeight = ((GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5)) / 2;
 		let imageStartY = colorRectY + colorRectHeight + GRID_PADDING;
 		let imgSize = ((GRID_SIZE + GRID_PADDING) - (imageStartY)) - GRID_PADDING;
-		image(cellImage, GRID_PADDING * 2, imageStartY, imgSize, imgSize);
+		image(cellImage, GRID_PADDING * 2 + slider.width / 2 - imgSize / 2, imageStartY, imgSize, imgSize);
 	}
 	
 	fill(255, 200);
