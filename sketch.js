@@ -1,4 +1,4 @@
-//1
+//2
 var testModel;
 
 (async function() {
@@ -116,14 +116,15 @@ function draw() {
 	
 	for(let i = 0; i < 5; i++) {
     		fill(0, map(i, 0, 4, 255, 10));
-		textSize(50);
+		let sizeOfText = (i == 0) ? (100) : (50);
+		textSize(sizeOfText);
 		textAlign(CENTER, BOTTOM);
-    		text(guesses[i].digit + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING * 5 + 55 * i);
+    		text(guesses[i].digit + "", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4, GRID_PADDING * 10 + 110 * i);
 		let amountMore = textWidth(guesses[i].digit + "") / 2.0;
 		
-		textSize(10);
-		textAlign(LEFT, TOP);
-		text((guesses[i].confidence * 100).toFixed(3) + "%", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4 + (amountMore * 4 / 5.0), GRID_PADDING * 5 + 55 * i);
+		textSize(sizeOfText / 5);
+		textAlign(LEFT, BOTTOM);
+		text((guesses[i].confidence * 100).toFixed(5) + "%", (width / 2 + GRID_SIZE / 2) + (width - GRID_SIZE) / 4 + (amountMore * 4 / 5.0), GRID_PADDING * 10 + 110 * i);
     	}
 }
 
@@ -136,6 +137,8 @@ function mousePressed() {
 }
 
 function mouseReleased() {
+	//predicts the number once the user releases 
+	//their mouse (once they are done drawing)
 	predict();
 }
 
