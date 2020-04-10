@@ -84,7 +84,7 @@ function predict() {
     }
 	var predictions = testModel.predict(tf.expandDims(imageArray)).array().then(function(preds) {
 		preds = preds[0];
-		for(int i = 0; i < preds.length; i++) {
+		for(let i = 0; i < preds.length; i++) {
 			guesses[i] = {digit: i, confidence: preds[i]};
 			console.log("Number: " + guesses[i][0] + " Confidence: " + guesses[i][1]);
 		}
