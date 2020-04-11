@@ -93,7 +93,7 @@ function predict() {
 	for(var y = 0; y < cells.length; y++) {
     		for(var x = 0; x < cells[y].length; x++) {
 			cellImage.set(x, y, cells[y][x].fillColor, (red(cells[y][x].fillColor) == 255) ? (0) : (255));
-       			imageArray[y][x] = map(red(cells[y][x].fillColor), 5, 1, 0);
+       			imageArray[y][x] = map(red(cells[y][x].fillColor), 0, 255, 1, 0);
     		}
     	}
 	cellImage.updatePixels();
