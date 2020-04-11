@@ -128,7 +128,7 @@ function draw() {
 		let colorRectY = slider.y + slider.height + GRID_PADDING * 1.5;
 		let colorRectHeight = ((GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5)) / 2;
 		let imageStartY = colorRectY + colorRectHeight + GRID_PADDING;
-		let imgSize = ((GRID_SIZE + GRID_PADDING) - (imageStartY)) - GRID_PADDING;
+		let imgSize = CELL_SIZE * 2;
 		image(cellImage, GRID_PADDING * 2 + slider.width / 2 - imgSize / 2, imageStartY, imgSize, imgSize);
 	}
 	
