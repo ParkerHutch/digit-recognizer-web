@@ -128,7 +128,7 @@ function draw() {
 		let colorRectY = slider.y + slider.height + GRID_PADDING * 1.5;
 		let colorRectHeight = ((GRID_SIZE + GRID_PADDING) - (slider.y + slider.height + GRID_PADDING * 1.5)) / 2;
 		let imageStartY = colorRectY + colorRectHeight + GRID_PADDING;
-		let imgSize = CELL_SIZE * 6;
+		let imgSize = CELL_SIZE * 8;
 		image(cellImage, GRID_PADDING * 2 + slider.width / 2 - imgSize / 2, imageStartY, imgSize, imgSize);
 	}
 	
@@ -238,7 +238,7 @@ class Ball {
 		this.position = createVector(x, y);
 		this.velocity = createVector(random(-3, 3), random(-3, 3));
 		this.radius = radius;
-		this.alpha = random(30, 50);
+		this.alpha = random(30, 70);
 	}
 
 	update() {
@@ -258,7 +258,7 @@ class Ball {
 			this.position.y = height - this.radius;
 			this.velocity.y *= -1;
 		}
-		this.alpha = map(sin((frameCount + this.radius) / 60), -1, 1, -30, 30);
+		this.alpha = map(sin((frameCount + this.radius) / 60), -1, 1, 20, 70);
 	}
 
 	drawLines(balls) {
@@ -266,7 +266,8 @@ class Ball {
 			let d = dist(balls[i].position.x, balls[i].position.y, this.position.x, this.position.y);
 			if(d > 0 && d < balls[i].radius + this.radius + (GRID_PADDING * 10)) {
 				strokeWeight(2);
-				stroke(0, min(map(d, 0, balls[i].radius + this.radius + (GRID_PADDING * 10), 255, 0), this.alpha) * 0.5);
+				let distanceStrokeTranslate = map(d, 0, balls[i].radius + this.radius + (GRID_PADDING * 10), 255, 0);
+				stroke(0, min(min(distanceStrokeTranslate, this.alpha), balls[i].alpha) * 0.5);
 				line(balls[i].position.x, balls[i].position.y, this.position.x, this.position.y);
 			}
 		}
