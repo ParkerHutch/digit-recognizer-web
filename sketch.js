@@ -26,7 +26,7 @@ let randomCircles;
 
 function setup() {
 	createCanvas(max(windowWidth, 1200), max(windowHeight, 800));
-	alert("Move the slider to adjust grayscale value. left click and drag to draw. Right click and drag to erase");
+	alert("Move the slider to adjust grayscale value. left click and drag to draw. Right click and drag to erase.");
     	randomCircles = new Array(8);
 
     	colorMode(RGB);
@@ -154,11 +154,27 @@ function draw() {
 }
 
 function mouseDragged() {
-	evaluateCell();
+	evaluateCell(mouseX, mouseY);
 }
 
 function mousePressed() {
-	evaluateCell();
+	evaluateCell(mouseX, mouseY);
+}
+
+function touchStarted() {
+	for(let i = 0; i < touches.length; i++) {
+		evaluateCell(touches.x, touches.y);
+	}
+}
+
+function touchMoved() {
+	for(let i = 0; i < touches.length; i++) {
+		evaluateCell(touches.x, touches.y);
+	}
+}
+
+function touchEnded() {
+	predict();	
 }
 
 function mouseReleased() {
@@ -167,9 +183,9 @@ function mouseReleased() {
 	predict();
 }
 
-function evaluateCell() {
-	if((mouseX >= width / 2 - GRID_SIZE / 2 && mouseX <= width / 2 + GRID_SIZE / 2) && (mouseY >= GRID_PADDING && mouseY <= GRID_SIZE + GRID_PADDING)) {
-    	var gridMouse = createVector(mouseX - (width / 2 - GRID_SIZE / 2), mouseY - GRID_PADDING);
+function evaluateCell(evalX, evalY) {
+	if((evalX >= width / 2 - GRID_SIZE / 2 && evalX <= width / 2 + GRID_SIZE / 2) && (evalY >= GRID_PADDING && evalY <= GRID_SIZE + GRID_PADDING)) {
+    	var gridMouse = createVector(evalX - (width / 2 - GRID_SIZE / 2), evalY - GRID_PADDING);
     	var cellSelected = createVector(parseInt(gridMouse.x / CELL_SIZE), parseInt(gridMouse.y / CELL_SIZE));
     	if(mouseButton == LEFT) {
     		if(slider.value() < red(cells[cellSelected.y][cellSelected.x].fillColor)) {
