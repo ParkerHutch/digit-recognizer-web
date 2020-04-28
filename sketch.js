@@ -26,10 +26,12 @@ let randomCircles;
 
 function setup() {
 	createCanvas(max(windowWidth, 1200), max(windowHeight, 800));
-	alert("Move the slider to adjust grayscale value. left click and drag to draw. Right click and drag to erase.");
+	alert("Move the slider to adjust grayscale value. left click and drag to draw. Right click and drag to erase");
     	randomCircles = new Array(8);
 
     	colorMode(RGB);
+	
+	noSmooth();
 	
 	for(let i = 0; i < guesses.length; i++) {
     		guesses[i] = {digit: i, confidence: 0};
